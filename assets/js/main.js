@@ -215,55 +215,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // --------------------------------------------------
-  // 5. PREFILL CONTACT FORM HELPER
+  // 5. PROJECT INQUIRY VIA WHATSAPP (INSTANT DIRECT CHAT)
   // --------------------------------------------------
   window.prefillProject = function(projectName) {
-    const serviceSelect = document.getElementById('serviceType');
-    const msgInput = document.getElementById('userMessage');
-    
-    if (projectName.includes('Villa') || projectName.includes('Stonecrest')) {
-      if (serviceSelect) serviceSelect.value = "Modern Villa Construction (2-Storey)";
-    } else if (projectName.includes('Bungalow') || projectName.includes('Terracotta')) {
-      if (serviceSelect) serviceSelect.value = "Contemporary Bungalow (Single Storey)";
-    } else if (projectName.includes('Completed')) {
-      if (serviceSelect) serviceSelect.value = "Complete Turnkey Home Construction";
-    }
-
-    if (msgInput) {
-      msgInput.value = `Hi WIN-J Building Solution LLP, I am interested in discussing a project similar to "${projectName}". Please share details and site consultation availability.`;
-    }
-
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-
-  // --------------------------------------------------
-  // 6. CONTACT FORM SUBMISSION
-  // --------------------------------------------------
-  window.handleFormSubmit = function(event) {
-    event.preventDefault();
-    const submitBtn = document.getElementById('submitBtn');
-    const formSuccessMessage = document.getElementById('formSuccessMessage');
-    const form = document.getElementById('inquiryForm');
-
-    // UI Feedback state
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing Request...';
-
-    setTimeout(() => {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = '<span>Submit Consultation Request</span> <i class="fa-solid fa-paper-plane"></i>';
-      
-      formSuccessMessage.style.display = 'flex';
-      form.reset();
-
-      setTimeout(() => {
-        formSuccessMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 100);
-    }, 1000);
+    const text = `Hi WIN-J Building Solution LLP, I am interested in discussing: ${projectName}. Please share details and consultation availability.`;
+    const waUrl = `https://wa.me/919632326130?text=${encodeURIComponent(text)}`;
+    window.open(waUrl, '_blank');
   };
 
 
@@ -316,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeDrawerBtn = document.getElementById('closeDrawerBtn');
   const mobileDrawer = document.getElementById('mobileDrawer');
   const drawerOverlay = document.getElementById('drawerOverlay');
-  const drawerLinks = document.querySelectorAll('.drawer-link');
+  const drawerLinks = document.querySelectorAll('.drawer-link, .drawer-footer a[href^="#"]');
 
   function openDrawer() {
     mobileDrawer.classList.add('open');
