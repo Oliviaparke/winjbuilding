@@ -1002,6 +1002,38 @@ input, select, textarea {
   color: #ffffff;
 }
 
+.badge-pill.badge-ongoing {
+  background-color: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+.badge-pill.badge-success {
+  background-color: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+.badge-ongoing-text {
+  color: #d97706 !important;
+  font-weight: 700 !important;
+}
+
+.video-media-wrap {
+  position: relative;
+  background-color: #0c1421;
+  height: 270px;
+  overflow: hidden;
+}
+
+.project-video-element {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background-color: #000;
+}
+
 .project-quick-view {
   position: absolute;
   bottom: 14px;

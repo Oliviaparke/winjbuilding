@@ -1,6 +1,6 @@
 /**
- * WIN-J BUILDING SOLUTION - Interactive Scripts
- * Handles Lightbox, Filter Tabs, Mobile Nav, WhatsApp Integration, and Form Handling
+ * WIN-J BUILDING SOLUTION LLP - Interactive Scripts
+ * Handles Lightbox (Images & Video), Filter Tabs, Mobile Nav, WhatsApp Integration, and Form Handling
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,14 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 0,
       title: "The Stonecrest Modern Villa",
-      category: "Luxury 2-Storey Villa",
+      category: "Two-Storey Villa (On Going)",
       image: "assets/images/project-1.jpg",
-      summary: "A modern dual-level residence defined by dramatic textured stone veneer accents, cantilevered rooflines, glass-paneled balconies, and warm ambient illumination.",
+      summary: "A modern dual-level residence defined by dramatic textured stone veneer accents, cantilevered rooflines, glass-paneled balconies, and warm ambient illumination. Currently under active turnkey construction.",
       specs: [
+        { label: "Status", value: "On Going Construction" },
         { label: "Built-up Area", value: "3,450 sq.ft" },
         { label: "Configuration", value: "4 BHK + Home Theatre" },
-        { label: "Floors", value: "Ground + First Floor" },
-        { label: "Execution", value: "Turnkey Architecture & Civil" }
+        { label: "Floors", value: "Ground + First Floor" }
       ],
       highlights: [
         "Natural Slate Cladding",
@@ -31,34 +31,33 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id: 1,
-      title: "The Horizon Ridge Estate",
-      category: "Contemporary Architecture",
-      image: "assets/images/project-2.jpg",
-      summary: "Engineered to maximize panoramic tropical sightlines with expansive floor-to-ceiling glass fenestrations, double-height ceiling lounge, and an elevated terrace garden.",
+      title: "Recently Completed Project",
+      category: "Completed Residential Walkthrough",
+      video: "assets/videos/recent-project.mp4",
+      summary: "On-site video walkthrough of our recently completed residential project, showcasing the finished exterior architecture, contemporary detailing, and interior spaces.",
       specs: [
-        { label: "Built-up Area", value: "3,800 sq.ft" },
-        { label: "Configuration", value: "4 BHK + Study" },
-        { label: "Levels", value: "2 Levels + Open Sky Deck" },
-        { label: "Orientation", value: "East-Facing Vastu Compliant" }
+        { label: "Status", value: "Completed & Handed Over" },
+        { label: "Project Type", value: "Custom Turnkey Residence" },
+        { label: "Location", value: "Kannur, Kerala" },
+        { label: "Finish", value: "Premium Architectural Finish" }
       ],
       highlights: [
-        "Minimalist Box Architecture",
-        "Courtyard Cross Ventilation",
-        "Custom Wood Slat Louvers",
-        "Italian Marble Living Room",
-        "EV Charging Port"
+        "Completed Turnkey Handover",
+        "Custom Interior Joinery",
+        "Modern Exterior Elevation",
+        "Architectural Ambient Lighting"
       ]
     },
     {
       id: 2,
       title: "The Terracotta Modern Bungalow",
-      category: "Single-Storey Contemporary Villa",
+      category: "Single-Storey Contemporary Villa (Completed)",
       image: "assets/images/project-3.jpg",
       summary: "A single-floor villa harmonizing exposed natural laterite brick masonry with clean horizontal roof profiles, landscaped boundary gardens, and a polished reflection driveway.",
       specs: [
+        { label: "Status", value: "Completed Project" },
         { label: "Built-up Area", value: "2,650 sq.ft" },
         { label: "Configuration", value: "3 BHK + Courtyard" },
-        { label: "Floors", value: "Single Storey + Rooftop Sitout" },
         { label: "Structure", value: "Climate-Responsive Brick Masonry" }
       ],
       highlights: [
@@ -74,10 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentProjectIndex = 0;
 
   // --------------------------------------------------
-  // 2. LIGHTBOX / PROJECT MODAL CONTROLLER
+  // 2. LIGHTBOX / PROJECT MODAL CONTROLLER (Image & Video)
   // --------------------------------------------------
   const projectModal = document.getElementById('projectModal');
   const modalImg = document.getElementById('modalImg');
+  const modalVideo = document.getElementById('modalVideo');
   const modalCategory = document.getElementById('modalCategory');
   const modalTitle = document.getElementById('modalTitle');
   const modalDescription = document.getElementById('modalDescription');
@@ -98,17 +98,40 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeLightbox() {
     projectModal.classList.remove('active');
     document.body.style.overflow = '';
+    if (modalVideo) {
+      modalVideo.pause();
+      modalVideo.src = '';
+    }
   }
 
   function renderProjectModal(index) {
     const p = projectsData[index];
     if (!p) return;
 
-    modalImg.src = p.image;
-    modalImg.alt = p.title;
     modalCategory.textContent = p.category;
     modalTitle.textContent = p.title;
     modalDescription.textContent = p.summary;
+
+    // Handle Video vs Image
+    if (p.video) {
+      if (modalImg) modalImg.style.display = 'none';
+      if (modalVideo) {
+        modalVideo.style.display = 'block';
+        modalVideo.src = p.video;
+        modalVideo.load();
+      }
+    } else {
+      if (modalVideo) {
+        modalVideo.pause();
+        modalVideo.style.display = 'none';
+        modalVideo.src = '';
+      }
+      if (modalImg) {
+        modalImg.style.display = 'block';
+        modalImg.src = p.image;
+        modalImg.alt = p.title;
+      }
+    }
 
     // Render Specs
     modalSpecs.innerHTML = p.specs.map(spec => `
@@ -198,14 +221,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const serviceSelect = document.getElementById('serviceType');
     const msgInput = document.getElementById('userMessage');
     
-    if (projectName.includes('Villa')) {
+    if (projectName.includes('Villa') || projectName.includes('Stonecrest')) {
       if (serviceSelect) serviceSelect.value = "Modern Villa Construction (2-Storey)";
-    } else if (projectName.includes('Bungalow')) {
+    } else if (projectName.includes('Bungalow') || projectName.includes('Terracotta')) {
       if (serviceSelect) serviceSelect.value = "Contemporary Bungalow (Single Storey)";
+    } else if (projectName.includes('Completed')) {
+      if (serviceSelect) serviceSelect.value = "Complete Turnkey Home Construction";
     }
 
     if (msgInput) {
-      msgInput.value = `Hi WIN-J Team, I am interested in building a home similar to "${projectName}". Please share architectural details and site consultation availability.`;
+      msgInput.value = `Hi WIN-J Building Solution LLP, I am interested in discussing a project similar to "${projectName}". Please share details and site consultation availability.`;
     }
 
     const contactSection = document.getElementById('contact');
