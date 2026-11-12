@@ -17,7 +17,7 @@ echo [1/3] Staging and committing latest changes...
 cd /d "%~dp0"
 
 "%GIT_CMD%" add .
-"%GIT_CMD%" commit -m "Update WIN-J Building Solution LLP: add LLP, video walkthrough, ongoing status, and Kannur address" >nul 2>&1
+"%GIT_CMD%" commit -m "Optimize responsive layout for iPhone, Android, tablet, and PC; remove consultation form" >nul 2>&1
 
 echo.
 echo ---------------------------------------------------
