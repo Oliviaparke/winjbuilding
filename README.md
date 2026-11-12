@@ -13,6 +13,7 @@ Simply open `index.html` in your web browser:
 
 ## 📍 Company Address & Direct WhatsApp
 - **Official Office Address:** WIN-J Building Solution LLP, Elamba, Uliyil P O, Kannur
+- **Google Maps Location:** [https://maps.app.goo.gl/VSFzjGhG4PXFBW8w5](https://maps.app.goo.gl/VSFzjGhG4PXFBW8w5)
 - **Official Phone Number:** +91 96323 26130
 - **Instant WhatsApp Chat:** [https://wa.me/919632326130](https://wa.me/919632326130)
 - **Official Gmail:** winjbuildingsolution@gmail.com
